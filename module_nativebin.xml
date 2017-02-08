@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_nativebin" default="compile.module.nativebin">
+  <dirname property="module.nativebin.basedir" file="${ant.file.module_nativebin}"/>
+  
+  <property name="module.jdk.home.nativebin" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.nativebin" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.nativebin" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.nativebin" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="nativebin.output.dir" value="${module.nativebin.basedir}/out/production/NativeBin"/>
+  <property name="nativebin.testoutput.dir" value="${module.nativebin.basedir}/out/test/NativeBin"/>
+  
+  <path id="nativebin.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="nativebin.module.production.classpath">
+    <path refid="${module.jdk.classpath.nativebin}"/>
+    <path refid="library.commons-io-2.5.classpath"/>
+  </path>
+  
+  <path id="nativebin.runtime.production.module.classpath">
+    <pathelement location="${nativebin.output.dir}"/>
+    <path refid="library.commons-io-2.5.classpath"/>
+  </path>
+  
+  <path id="nativebin.module.classpath">
+    <path refid="${module.jdk.classpath.nativebin}"/>
+    <pathelement location="${nativebin.output.dir}"/>
+    <path refid="library.commons-io-2.5.classpath"/>
+  </path>
+  
+  <path id="nativebin.runtime.module.classpath">
+    <pathelement location="${nativebin.testoutput.dir}"/>
+    <pathelement location="${nativebin.output.dir}"/>
+    <path refid="library.commons-io-2.5.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.nativebin">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.nativebin">
+    <patternset refid="excluded.from.module.nativebin"/>
+  </patternset>
+  
+  <path id="nativebin.module.sourcepath">
+    <dirset dir="${module.nativebin.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.nativebin" depends="compile.module.nativebin.production,compile.module.nativebin.tests" description="Compile module NativeBin"/>
+  
+  <target name="compile.module.nativebin.production" depends="register.custom.compilers" description="Compile module NativeBin; production classes">
+    <mkdir dir="${nativebin.output.dir}"/>
+    <javac2 destdir="${nativebin.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.nativebin}/javac">
+      <compilerarg line="${compiler.args.nativebin}"/>
+      <bootclasspath refid="nativebin.module.bootclasspath"/>
+      <classpath refid="nativebin.module.production.classpath"/>
+      <src refid="nativebin.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.nativebin"/>
+    </javac2>
+    
+    <copy todir="${nativebin.output.dir}">
+      <fileset dir="${module.nativebin.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.nativebin.tests" depends="register.custom.compilers,compile.module.nativebin.production" description="compile module NativeBin; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.nativebin" description="cleanup module">
+    <delete dir="${nativebin.output.dir}"/>
+    <delete dir="${nativebin.testoutput.dir}"/>
+  </target>
+</project>

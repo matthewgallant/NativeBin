@@ -1,4 +1,4 @@
-package chillinerd.nativebin;
+package nativebin;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -73,11 +73,34 @@ public class Controller {
     }
 
     @FXML
+    private void resetJRE(ActionEvent actionEvent) {
+        jreLabel.setText("No JRE set to be Bundled");
+    }
+
+    @FXML
     private void bundleJRE(ActionEvent actionEvent) {
+        jre = 0;
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Bundle JRE");
+        alert.setHeaderText("How to Choose a JRE");
+        alert.setContentText("In order to bundle a JRE, please choose the Java home directory. It should be 'JAVA VERSION/Contents/Home/'.");
+        alert.showAndWait();
+
         DirectoryChooser jreChooser = new DirectoryChooser();
+        jreChooser.setInitialDirectory(new File("/Library/Java/JavaVirtualMachines/"));
         File selectedJre = jreChooser.showDialog(null);
-        jreLabel.setText(selectedJre.getAbsolutePath());
-        jre = 1;
+
+        if (selectedJre.getName().equals("Home")) {
+            jreLabel.setText(selectedJre.getAbsolutePath());
+            jre = 1;
+        } else {
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            error.setTitle("JRE Error");
+            error.setHeaderText("No JRE Found");
+            error.setContentText("Please select a JRE home folder!");
+            error.showAndWait();
+        }
     }
 
     @FXML
@@ -96,7 +119,7 @@ public class Controller {
 
                         try {
                             Files.copy( Paths.get(jarLabel.getText()),
-                                    Paths.get( saveLabel.getText() + "/" + nameField.getText() + ".app/Contents/MacOS/nativebin.jar" ),
+                                    Paths.get( saveLabel.getText() + "/" + nameField.getText() + ".app/Contents/MacOS/application.jar" ),
                                     StandardCopyOption.REPLACE_EXISTING);
                         } catch (IOException e) {
                             System.out.print("JAR ERROR");
@@ -153,7 +176,7 @@ public class Controller {
                                         "# Constants\n" +
                                         "JAVA_MAJOR=1\n" +
                                         "JAVA_MINOR=1\n" +
-                                        "APP_JAR=\"nativebin.jar\"\n" +
+                                        "APP_JAR=\"application.jar\"\n" +
                                         "APP_NAME=\"" + nameField.getText() + "\"\n" +
                                         "VM_ARGS=\"\"\n" +
                                         "\n" +
@@ -206,8 +229,8 @@ public class Controller {
                                         "# Constants\n" +
                                         "JAVA_MAJOR=1\n" +
                                         "JAVA_MINOR=1\n" +
-                                        "APP_JAR=\"nativebin.jar\"\n" +
-                                        "APP_NAME=\"TIDE\"\n" +
+                                        "APP_JAR=\"application.jar\"\n" +
+                                        "APP_NAME=\"" + nameField.getText() + "\"\n" +
                                         "VM_ARGS=\"\"\n" +
                                         "\n" +
                                         "# Set the working directory\n" +
@@ -231,6 +254,8 @@ public class Controller {
 
                             File java = new File(saveLabel.getText() + "/" + nameField.getText() + ".app/Contents/Java/bin/java");
                             java.setExecutable(true);
+
+                            jre = 0;
 
                         } else {
                             System.out.print("NativeBin JRE Error!");

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nativebin.Controller">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="290.0" minWidth="10.0" prefWidth="185.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="471.0" minWidth="10.0" prefWidth="331.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="471.0" minWidth="10.0" prefWidth="84.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <Label text="Application Name">
+            <GridPane.margin>
+                <Insets left="30.0" />
+            </GridPane.margin>
+        </Label>
+        <TextField fx:id="nameField" promptText="Application Name" GridPane.columnIndex="1">
+            <GridPane.margin>
+                <Insets />
+            </GridPane.margin>
+        </TextField>
+        <Label text="Bundle Identifier" GridPane.rowIndex="1">
+            <GridPane.margin>
+                <Insets left="30.0" />
+            </GridPane.margin>
+        </Label>
+        <TextField fx:id="copyField" prefWidth="371.0" promptText="Bundle Identifier" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <GridPane.margin>
+                <Insets />
+            </GridPane.margin>
+        </TextField>
+        <Label text="Icon" GridPane.rowIndex="2">
+            <GridPane.margin>
+                <Insets left="30.0" />
+            </GridPane.margin>
+        </Label>
+        <Label text="JAR File" GridPane.rowIndex="3">
+            <GridPane.margin>
+                <Insets left="30.0" />
+            </GridPane.margin>
+        </Label>
+        <Label text="Destination" GridPane.rowIndex="4">
+            <GridPane.margin>
+                <Insets left="30.0" />
+            </GridPane.margin>
+        </Label>
+        <Label fx:id="iconLabel" text="Select An Icon" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label fx:id="jarLabel" text="Select A JAR File" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label fx:id="saveLabel" text="Select A Save Destination" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Label text="Bundled JRE (Optional)" GridPane.rowIndex="5">
+            <GridPane.margin>
+                <Insets left="30.0" />
+            </GridPane.margin>
+        </Label>
+        <Button fx:id="iconButton" mnemonicParsing="false" onAction="#selectIcon" text="..." GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <GridPane.margin>
+                <Insets left="20.0" />
+            </GridPane.margin>
+        </Button>
+        <Button fx:id="jarButton" mnemonicParsing="false" onAction="#selectJar" text="..." GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <GridPane.margin>
+                <Insets left="20.0" />
+            </GridPane.margin>
+        </Button>
+        <Button fx:id="saveButton" mnemonicParsing="false" onAction="#selectSave" text="..." GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <GridPane.margin>
+                <Insets left="20.0" />
+            </GridPane.margin>
+        </Button>
+        <Button fx:id="createButton" mnemonicParsing="false" onAction="#create" text="Generate macOS Bundle" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+            <GridPane.margin>
+                <Insets right="-70.0" />
+            </GridPane.margin>
+        </Button>
+        <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quit" text="Quit" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+            <GridPane.margin>
+                <Insets right="70.0" />
+            </GridPane.margin>
+        </Button>
+        <Button fx:id="jreButton" mnemonicParsing="false" onAction="#bundleJRE" text="..." GridPane.columnIndex="2" GridPane.rowIndex="5">
+            <GridPane.margin>
+                <Insets left="20.0" />
+            </GridPane.margin>
+        </Button>
+        <Label fx:id="jreLabel" text="No JRE set to be Bundled" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <ImageView fx:id="loadingIndicator" fitHeight="36.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <image>
+                <Image url="@loading.gif" />
+            </image>
+        </ImageView>
+        <Label fx:id="createLabel" text="Finished Exporting Bundle!" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <GridPane.margin>
+                <Insets left="50.0" />
+            </GridPane.margin>
+        </Label>
+        <Button fx:id="aboutButton" mnemonicParsing="false" onAction="#about" text="About" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+            <GridPane.margin>
+                <Insets left="70.0" />
+            </GridPane.margin>
+        </Button>
+      <Button mnemonicParsing="false" onAction="#resetJRE" text="Clear" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+         <GridPane.margin>
+            <Insets right="10.0" />
+         </GridPane.margin>
+      </Button>
+    </children>
+</GridPane>

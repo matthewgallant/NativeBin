@@ -1,4 +1,4 @@
-package chillinerd.nativebin;
+package nativebin;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +10,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("builder.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
         primaryStage.setTitle("NativeBin");
-        primaryStage.setScene(new Scene(root, 600, 700));
-        primaryStage.setResizable(false);
+        primaryStage.setScene(new Scene(root, 600, 500));
         primaryStage.show();
     }
 

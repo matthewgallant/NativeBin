@@ -14,7 +14,7 @@ NativeBin requires these:
 
 ### Installing
 
-Download the latest release in the [releases](https://github.com/ChilliNerd/NativeBin/wiki/Releases) page, unzip the archive and run NativeBin.app.
+Download the latest release in the [releases](https://github.com/MatthewGallant/NativeBin/releases) page, unzip the archive and run NativeBin.app.
 
 ## Authors
 

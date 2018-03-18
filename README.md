@@ -1,6 +1,8 @@
 # NativeBin
 NativeBin is an application that allows you to create native macOS bundles from jar files.
 
+![NativeBin](/screenshot.png)
+
 ## Getting Started
 
 This will get a copy of NativeBin working on your system.

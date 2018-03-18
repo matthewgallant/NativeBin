@@ -1,17 +1,17 @@
 # NativeBin
-NativeBin is an application that allows you to create native macOS bundles from jar files.
+NativeBin is an Application That Allows You to Create Native macOS Bundles From Jar Files.
 
 ![NativeBin](/screenshot.png)
 
 ## Getting Started
 
-This will get a copy of NativeBin working on your system.
+This will get a copy of NativeBin running on your system.
 
 ### Prerequisites
 
 NativeBin requires these:
 
-- Intel-based Mac
+- Intel-Based Mac
 - Java 1.8
 
 ### Installing
@@ -20,7 +20,7 @@ Download the latest release in the [releases](https://github.com/MatthewGallant/
 
 ## Authors
 
-* **Matt Galant** - *Initial work* - [ChilliNerd](https://github.com/ChilliNerd)
+* **Matt Gallant** - *Initial Work* - [MatthewGallant](https://github.com/MatthewGallant)
 
 ## License
 
